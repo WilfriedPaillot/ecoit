@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Ecoit</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +12,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+      <div class="container">
+        <%= yield %>
+      </div>
+    <%= render 'shared/footer' %>
   </body>
 </html>
