@@ -1,0 +1,15 @@
+// Custom colors variables
+//$fluo_green: rgba(92,216,34, 1);
+
+// New map colors
+$new-colors: (
+//"fluo": $fluo_green
+);
+
+// Merge new map colors with default colors
+$theme-colors: map-merge($theme-colors, $new-colors);
+
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
