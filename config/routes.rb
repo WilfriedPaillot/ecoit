@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :uts_lessons
+  resources :ut_sections
   resources :user_trainings
   resources :lessons
   resources :sections
