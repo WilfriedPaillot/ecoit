@@ -1,0 +1,2 @@
+class UtsLessonsController < ApplicationController
+end
