@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  userTraining: one
+  completion_rate: 1
+
+two:
+  userTraining: two
+  completion_rate: 1
