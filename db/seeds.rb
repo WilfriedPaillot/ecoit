@@ -50,29 +50,6 @@ end
   p ' #######################################'
   puts "\n"*2
 
-  # learner = User.where(role: 0).first
-  # training = Training.first
-  # sections = Section.where(training_id: training.id)
-
-  # ut = UserTraining.create(user_id: learner.id, training_id: training.id)
-  # puts "#{ut.user_id} - #{ut.training_id} - #{ut.completion_rate}"
-  # puts "\n"
-
-  # # Pour chaque Section de la formation :
-  # sections.each do |section|
-  #   # On crée une instance de UserSection
-  #   us = UtSection.create(user_training_id: ut.id)
-  #   puts "#{us.user_training_id} - #{us.completion_rate}"
-  #   puts "\n"
-  #   # Pour chaque Lesson de la Section :
-  #   section.lessons.each do |lesson|
-  #     # On crée une instance de UserLesson
-  #     ul = UtsLesson.create(ut_section_id: us.id)
-  #     puts "#{ul.ut_section_id} - #{ul.completed}"
-  #     puts "\n"
-  #   end
-  # end
-
 UserTraining.create(user_id: User.where(role: 0).first.id, training_id: Training.first.id)
 puts " - Link 'user_training' nr. #{UserTraining.last.id} created between user nr. #{User.where(role: 0).first.id} (#{User.find(User.where(role: 0).first.id).email}) and training '#{Training.first.title}'"
 
