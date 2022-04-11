@@ -29,8 +29,9 @@ p '## Generation des formations ##'
 p ' #############################'
 puts "\n"*2
 
-2.times do |x|
-  Training.create(title: Faker::ProgrammingLanguage.name, description: Faker::Marketing.buzzwords, user_id: User.where(role: 1).last.id)
+10.times do |x|
+  instructors = User.where(role: 1)
+  Training.create(title: Faker::ProgrammingLanguage.name, description: Faker::Marketing.buzzwords, user_id: instructors.sample.id)
   p "La leçon #{Training.last.title.upcase} a été créée"
   puts "\n"
     3.times do |x|
