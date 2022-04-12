@@ -4,4 +4,6 @@ class Training < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 500 }
+
+  scope :ordered, -> { order(:created_at => :desc) }
 end
