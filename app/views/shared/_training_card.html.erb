@@ -1,0 +1,23 @@
+<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+  <div class="training-item border">
+    <%= image_tag("training/training-1.jpg", class:"img-fluid", alt:"#{training.title} image") %>
+    <div class="training-content p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="badge rounded-pill bg-success text-light py-2">Nouveauté</span>
+      </div>
+      <h3><%= training.title %></h3>
+      <p><%= training.description %></p>
+      <span><%= link_to 'Lire plus', training_path(training.id), class:"" %></span> 
+      <div class="trainer d-flex justify-content-between align-items-center border-top">
+        <div class="trainer-profile d-flex align-items-center">
+          <i class="bi bi-person-video3 fs-3 me-2"></i>
+          <span><%= training.user.email.split('-').first %></span>
+        </div>
+        <div class="trainer-rank d-flex align-items-center">
+          <span><%= Training.where(user_id: training.user.id).count %></span>
+          <i class="bi bi-book fs-3 ms-2"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
