@@ -1,0 +1,23 @@
+<section class="row">
+  <div class="col-md-6">
+    <h2>Training: <%= @training.title %></h2>
+    <p>
+      <%= @training.description %>
+    </p>
+    <p>
+      <%= link_to 'Back', trainings_path %>
+      <%if user_signed_in? %>
+        <%= link_to "Rejoindre", user_trainings_path(user_id: current_user.id, training_id: @training.id), method: "POST" %>
+      <%end %>
+    </p>
+  </div>
+  <div class="col-md-6">
+    <h2>Détails</h2>
+    <ul>
+      <% @training_details.each do |section| %>
+        <li><%= section.title %></li>
+        <li><%= section.description %></li>
+      <% end %>
+    </ul>
+  </div>
+</section>

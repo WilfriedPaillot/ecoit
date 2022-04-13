@@ -1,0 +1,5 @@
+<section class="row">
+  <% @trainings.each do |training| %>
+    <%= render 'shared/training_card', training: training %>
+  <% end %>
+</section>
