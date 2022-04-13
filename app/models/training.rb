@@ -6,4 +6,10 @@ class Training < ApplicationRecord
   validates :description, presence: true, length: { maximum: 500 }
 
   scope :ordered, -> { order(:created_at => :desc) }
+
+private
+  def self.search(search)
+    where("title ILIKE :param OR description ILIKE :param", param: "%#{search.downcase}%")
+  end
+  
 end

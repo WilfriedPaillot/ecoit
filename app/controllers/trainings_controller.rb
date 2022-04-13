@@ -2,7 +2,11 @@ class TrainingsController < ApplicationController
   before_action :set_training, only: [:show, :edit, :update, :destroy]
 
   def index
-    @trainings = Training.ordered
+    if params[:search].present?
+      @trainings = Training.search(params[:search])
+    else
+      @trainings = Training.ordered
+    end
   end
 
   def show
