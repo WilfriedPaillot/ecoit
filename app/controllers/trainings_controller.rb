@@ -4,6 +4,12 @@ class TrainingsController < ApplicationController
   def index
     if params[:search].present?
       @trainings = Training.search(params[:search])
+      if @trainings.empty?
+        flash.now[:danger] = "Aucun résultat pour \"#{params[:search]}\""
+        @trainings = Training.ordered
+      else
+        @trainings.ordered
+      end
     else
       @trainings = Training.ordered
     end
