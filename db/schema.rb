@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_07_095829) do
+ActiveRecord::Schema.define(version: 2022_04_14_182039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 2022_04_07_095829) do
     t.integer "completion_rate", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "section_id"
+    t.index ["section_id"], name: "index_ut_sections_on_section_id"
     t.index ["user_training_id"], name: "index_ut_sections_on_user_training_id"
   end
 
@@ -101,6 +103,8 @@ ActiveRecord::Schema.define(version: 2022_04_07_095829) do
     t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "lesson_id"
+    t.index ["lesson_id"], name: "index_uts_lessons_on_lesson_id"
     t.index ["ut_section_id"], name: "index_uts_lessons_on_ut_section_id"
   end
 
@@ -110,6 +114,8 @@ ActiveRecord::Schema.define(version: 2022_04_07_095829) do
   add_foreign_key "trainings", "users"
   add_foreign_key "user_trainings", "trainings"
   add_foreign_key "user_trainings", "users"
+  add_foreign_key "ut_sections", "sections"
   add_foreign_key "ut_sections", "user_trainings"
+  add_foreign_key "uts_lessons", "lessons"
   add_foreign_key "uts_lessons", "ut_sections"
 end
