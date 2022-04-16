@@ -1,8 +1,13 @@
-<section class="row">
-  <%= form_tag(trainings_path, method: 'get') do %>
-    <%= text_field_tag :search %>
-    <%= submit_tag 'Search' %>
-  <% end %> 
+<section class="row justify-content-center py-3 mb-5 bg-primary">
+  <div class="col-md-6 text-center">
+    <h2 class="text-light">Catalogue de formations</h2>
+    <hr class="bg-light">
+    <p class="text-light">Recherche par mots clés</p>
+    <%= form_tag(trainings_path, method: 'get') do %>
+      <%= text_field_tag :search, "", class:"form-control" %>
+      <%= submit_tag 'Chercher', class:"btn btn-secondary mt-3" %>
+    <% end %> 
+  </div>
 </section>
 
 <section class="row">
@@ -11,6 +16,49 @@
   <% end %>
   
   <% @trainings.each do |training| %>
-    <%= render 'shared/training_card', training: training %>
+    <div class="col-md-4 col-lg-3 mb-3"> 
+      <div class="card bg-primary text-light">
+        <%= image_tag('code_bg.jpg', alt: "Background code theme card", class: 'card-img-top') %>
+        <div class="card-body mt-2">
+          <h5 class="card-title"><%= training.title %></h5>
+          <p class="card-text my-4">
+            <%= training.description.truncate(60,separator:" ") %>
+          </p>
+          <%= link_to("Voir le cours", training_path(training.id), class:"btn btn-outline-secondary btn-sm") %>
+        </div>
+        
+        <%if user_signed_in? %>
+        <div class="card-footer">
+          <div class="d-flex justify-content-between align-items-center">
+              <%if UserTraining.where(user_id: current_user.id, training_id: training.id).exists? %>
+                <%if UserTraining.find_by(user_id: current_user.id, training_id: training.id).completion_rate < 100 %>
+                  <div id="arrow" class="col-4">
+                    <%= link_to trainings_path do %>
+                      <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
+                    <%end%>
+                  </div>
+                  <div id="session_infos" class="col-8">
+                    <%= link_to 'Poursuivre', training_path(training.id), class:"nav-link text-secondary" %>
+                  </div>
+                <%else%>
+                  <div id="session_infos" class="col-8">
+                    <p class="text-light">Terminé</p>
+                  </div>
+                <%end%>
+              <%else%>
+                <div id="arrow" class="col-4">
+                  <%= link_to trainings_path do %>
+                    <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
+                  <%end%>
+                </div>
+                <div id="session_infos" class="col-8">
+                  <%= link_to "Rejoindre", user_trainings_path(user_id: current_user.id, training_id: training.id), method: "POST" %>
+                </div>
+              <%end%>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
   <% end %>
 </section>
