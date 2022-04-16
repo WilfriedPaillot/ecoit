@@ -1,5 +1,191 @@
-<section class="row">
-  <%@trainings.each do |training| %>
-    <%= render 'shared/training_card', training: training %>
-  <%end %>
+<!-- BANNER SECTION  -->
+<section class="row py-5 mb-5 bg-primary">
+    <div class="col-md-6 text-center"> 
+        <%= image_tag("banner_index.jpg", alt:"Photo de startupeurs", class:"img-fluid", width:"500") %>
+    </div>
+    <div class="col-md-6">
+        <h1 class="text-secondary ">EcoDevIt!</h1>
+        <h2 class="text-light">La nouvelle plateforme web d'apprentissage éco-responsable</h2>
+        <p class="text-light lead fs-4">
+            <%if current_user %>
+            <%= current_user.nickname %>, suivez
+            <%end%> 
+            Vos règles, Votre rythme, Votre communauté !
+        </p>
+        <div class="row">
+        <div class="col-md-8 d-flex justify-content-center pt-5">
+            <%if !user_signed_in? %>
+                <%= link_to("S'inscrire",new_user_registration_path, class:"btn btn-outline-secondary btn-lg text-light mx-3", method:"get") %>
+                <%= link_to("Se connecter",new_user_session_path, class:"btn btn-outline-secondary btn-lg text-light mx-3", method:"get") %>
+            <%end%>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRESENTATION SECTION -->
+  <section class="container">
+    <h1 class="orange_underline">EcoDevIt, en quelques mots</h1>
+    
+    <div class="row justify-content-between py-5">
+      <div class="col-lg-3 col-md-6">
+        <div class="card-1">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-book-half fs-1"></i>
+            </div>
+            <h5 class="card-title">Apprentissage</h5>
+            <p class="card-text">Apprendre par la pratique, de manière concise et explicite grâce à des expériences d’apprentissage d’autres membres de la communauté.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card-2">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-broadcast-pin fs-1"></i>
+            </div>
+            <h5 class="card-title">Communauté</h5>
+            <p class="card-text">Une communauté bienveillante pour échanger et communiquer à tout moment, avec d’autres passionnés ayant les mêmes envies d’apprendre que vous.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card-3">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-chat-heart fs-1"></i>
+            </div>  
+            <h5 class="card-title">Accessible à tous</h5>
+            <p class="card-text">Nos modules sont accessibles gratuitement et quand vous le souhaitez. Chaque membre peut y contribuer à sa manière et partager ses connaissances.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card-4">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-bookmark-star-fill fs-1"></i>
+            </div>
+            <h5 class="card-title">Mise en relation</h5>
+            <p class="card-text">Des cursus recensant les meilleures ressources d’internet, soigneusement sélectionnées par nos membres.</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+
+
+<!-- THEMES SECTION -->
+  <section class="container">
+    <h1 class="orange_underline">Nos cursus</h1>
+      <div class="row justify-content-between py-5">
+        <%@trainings.each do |training| %>
+            
+          <div class="col-md-4 col-lg-3 mb-3"> 
+            <div class="card bg-primary text-light">
+              <%= image_tag('code_bg.jpg', alt: "Background code theme card", class: 'card-img-top') %>
+              <div class="card-body mt-2">
+                <h5 class="card-title"><%= training.title %></h5>
+                <p class="card-text my-4">
+                  <%= training.description.truncate(60,separator:" ") %>
+                </p>
+                <%= link_to("Voir le cours", training_path(training.id), class:"btn btn-outline-secondary btn-sm") %>
+              </div>
+            </div>
+          </div>
+
+        <%end%>
+
+      </div>
+      <div class="row pb-5">
+        <%= link_to trainings_path, class: "nav-link" do%>
+          <i class="bi bi-chevron-double-right text-secondary fs-3"></i>
+          <span class="text-deep_blue fs-4 align-center ms-3">Découvrez toutes nos formations</span> 
+        <%end%>
+      </div>
+  </section>
+
+<!-- FEEDBACKS SECTION -->
+<section class="container">
+  <h2 class="orange_underline">Témoignages d'alumnis</h2>
+
+	<div class="row py-5">
+
+	<div class="col-lg-4">
+		<div class="card">
+				<div class="card-body">
+					<div class="block-author">
+						<div class="author-image">
+              <%= image_tag("student.jpg", alt:"Pic Student 01", class:"rounded", width:"60") %>
+						</div>
+						<div class="author-info">
+							<span class="d-block mt-1"><b>Jérôme Pichenot</b></span>
+						</div>
+					</div>
+          <p class="mt-4">
+            Une plateforme au-delà de mes attentes. C'est intuitif, riche, complet, je recommande !
+					</p>
+				</div>
+		</div>
+	</div>
+
+  <div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="block-author">
+						<div class="author-image">
+              <%= image_tag("student.jpg", alt:"Pic Student 04", class:"rounded", width:"60") %>
+						</div>
+						<div class="author-info">
+							<span class="d-block mt-1"><b>Alexandra Ginova</b></span>
+						</div>
+					</div>
+          <p class="mt-4 line-height-1_8">
+            Grâce à EcoDevIT! j'ai pu aboutir ma reconversion professionnelle avec succès tout en faisant mes propres choix à mon rythme.
+					</p>
+				</div>
+			</div>
+	</div>
+
+  <div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="block-author">
+						<div class="author-image">
+              <%= image_tag("student.jpg", alt:"Pic Student 05", class:"rounded", width:"60") %>
+						</div>
+						<div class="author-info">
+							<span class="d-block mt-1"><b>Carl Philip</b></span>
+						</div>
+					</div>
+          <p class="mt-4">
+            Très cool ! Je suis mes choix préférés quand je le souhaite et en plus c'est pas cher.
+					</p>
+				</div>
+			</div>
+  </div>
+</section>
+
+<!-- PARTNERS SECTION  -->
+<section class="row justify-content-between my-5">
+  <div class="text-center">
+    <h2 class="orange_underline">Ils reconnaissent la qualité de nos formations</h2>
+    <div class="d-flex justify-content-around mt-5">
+      <div class="col-md-2">
+        <%= link_to "https://about.google/", :target => "_blank" do %>
+          <%= image_tag("google_logo.png", alt:"Logo Google", width: "200") %>
+        <%end%>
+      </div>
+      <div class="col-md-2">
+        <%= link_to "https://fr.wikipedia.org/wiki/Mammouth_(hypermarch%C3%A9)", :target => "_blank" do %>
+          <%= image_tag("mammouth_logo.png", alt:"Logo Mammouth", width: "200") %>
+        <%end%>
+      </div>
+    </div>
+  </div>
 </section>
