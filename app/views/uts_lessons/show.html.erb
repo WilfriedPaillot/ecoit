@@ -1,0 +1,16 @@
+<section class="row d-flex justify-content-center">
+  <div class="col-md-8">
+    <h3><%= @lesson.title %></h3>
+    <p><%= @lesson.content %></p>
+  </div>
+</section>
+
+<%= @uts_lesson.completed %>
+
+<%= link_to "Terminer", uts_lesson_path(@uts_lesson.id), method: 'PUT' %>
+
+<section>
+  <% if flash.any? %>
+    <%= render 'shared/flash' %>
+  <% end %>
+</section>  
