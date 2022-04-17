@@ -1,0 +1,28 @@
+<%#uts_infos = Section.where(training_id: params[:training])%>
+<%uts_infos = UtSection.where(user_training_id: UserTraining.where(user_id: current_user.id, training_id: params[:training]))%>
+  <%if uts_infos.empty? %>
+    <p>Pas de sortie</p>
+  <%else%>
+  <%# Chapter horyzontal card %>
+    <%uts_infos.each do |section| %>
+      <div class="row my-3">
+        <div class="col-10 bg-primary">
+          <div class="row">
+            <div class="col-md-4 col-lg-3">
+              <%= image_tag(chapter_logo, alt: "Logo du chapitre", class: 'img-fluid') rescue image_tag('SVG_Logo.svg', alt: "Logo du chapitre", class: 'img-fluid') %>
+            </div>
+            <div class="col-auto d-flex flex-column justify-content-center align-items-start">
+              <h4 class="text-light"><%= Section.find(section.section_id).title %></h4>
+              <p class="text-light"><%= Section.find(section.section_id).description %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
+            <p class="fs-1"><%= section.completion_rate %> %</p>
+            <%= link_to "Cours", lesson_path(section.id) %>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  <%end%>
