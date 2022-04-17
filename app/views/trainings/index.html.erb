@@ -33,12 +33,12 @@
               <%if UserTraining.where(user_id: current_user.id, training_id: training.id).exists? %>
                 <%if UserTraining.find_by(user_id: current_user.id, training_id: training.id).completion_rate < 100 %>
                   <div id="arrow" class="col-4">
-                    <%= link_to training_path(training.id) do %>
+                    <%= link_to user_trainings_path do %>
                       <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
                     <%end%>
                   </div>
                   <div id="session_infos" class="col-8">
-                  <%= link_to 'Poursuivre', user_trainings_path %>
+                  <%= link_to 'Poursuivre', user_trainings_path, class:"text-secondary" %>
                   </div>
                 <%else%>
                   <div id="session_infos" class="col-8">
@@ -52,7 +52,7 @@
                   <%end%>
                 </div>
                 <div id="session_infos" class="col-8">
-                  <%= link_to "Rejoindre", user_trainings_path(user_id: current_user.id, training_id: training.id), method: "POST" %>
+                  <%= link_to "Rejoindre", user_trainings_path(user_id: current_user.id, training_id: training.id), method: "POST", class:"text-secondary" %>
                 </div>
               <%end%>
           </div>
