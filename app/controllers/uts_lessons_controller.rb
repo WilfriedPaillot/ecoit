@@ -14,9 +14,8 @@ class UtsLessonsController < ApplicationController
     if UtsLesson.where(id: lesson.id.to_i + 1).exists?
       redirect_to uts_lesson_path(lesson.id.to_i + 1)
     else
-      flash[:notice] = "Félicitations, vous avez terminé toutes les leçons !"
-      # redirect_to user_trainings_path(current_user)
-      return
+      flash[:warning] = "Félicitations, vous avez terminé toutes les leçons de cette formation !"
+      redirect_to user_trainings_path(current_user)
     end
   end
 end
