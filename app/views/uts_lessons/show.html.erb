@@ -13,8 +13,9 @@
       <%end%></h3>
       <p><%= @lesson.content %></p>
     </div>
-    <div class="buttons">
+    <div class="buttons d-flex">
       <%= link_to "Suivant", uts_lesson_path(@uts_lesson.id), method: 'PUT', class:"btn rounded-pill bg-secondary" %>
+      <%= link_to "Quitter", user_trainings_path, class:"btn text-secondary" %>
     </div>
   </div>
 </section>
