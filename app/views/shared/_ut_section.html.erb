@@ -20,7 +20,7 @@
         <div class="col-2">
           <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
             <p class="fs-1"><%= section.completion_rate %> %</p>
-            <%= link_to "Cours", lesson_path(Lesson.where(section_id: UtSection.find_by(section_id: section.section_id)).first.id) %>
+            <%= link_to "Cours", uts_lesson_path(UtsLesson.where(lesson_id: Lesson.find_by(section_id: section.section_id).id).last.id) %>
           </div>
         </div>
       </div>
