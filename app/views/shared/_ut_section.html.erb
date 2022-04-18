@@ -19,7 +19,7 @@
         </div>
         <div class="col-2">
           <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
-            <p class="fs-1"><%= section.completion_rate %> %</p>
+            <p class="fs-1"><%= section.completion_rate %> / <%= UtsLesson.where(ut_section_id: section.section_id ).length/2 %></p>
             <%= link_to "Cours", uts_lesson_path(UtsLesson.where(lesson_id: Lesson.find_by(section_id: section.section_id).id).last.id) %>
           </div>
         </div>
