@@ -16,7 +16,8 @@ class UserTrainingsController < ApplicationController
         Section.where(training_id: params[:training_id]).each do |section|
           UtSection.create(user_training_id: @user_training.id, section_id: section.id)
           Lesson.where(section_id: section.id).each do |lesson|
-            UtsLesson.create(ut_section_id: section.id, lesson_id: lesson.id)
+            # UtsLesson.create(ut_section_id: section.id, lesson_id: lesson.id)
+            UtsLesson.create(ut_section_id: UtSection.last.id, lesson_id: lesson.id)
           end
         end
       redirect_to user_trainings_path, flash: { success: "La formation a bien été ajoutée à votre médiathèque" }
