@@ -59,3 +59,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "bootstrap", "~> 5.1"
 gem "jquery-rails", "~> 4.4"
+
+gem "devise", "~> 4.8"
+
+gem "database_cleaner", "~> 2.0"
+gem "faker", "~> 2.20"

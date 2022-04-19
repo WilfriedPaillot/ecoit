@@ -1,0 +1,23 @@
+<section>
+  <% if flash.any? %>
+    <%= render 'shared/flash' %>
+  <% end %>
+</section>
+
+<section class="row d-flex justify-content-center">
+  <div class="col-md-8">
+    <div class="content">
+      <h3><%= @lesson.title %>
+      <%if @uts_lesson.completed %>
+      <i class="bi bi-check-circle-fill text-secondary"></i>
+      <%end%></h3>
+      <p><%= @lesson.content %></p>
+    </div>
+    <div class="buttons d-flex">
+      <%= link_to "Suivant", uts_lesson_path(@uts_lesson.id), method: 'PUT', class:"btn rounded-pill bg-secondary" %>
+      <%= link_to "Quitter", user_trainings_path, class:"btn text-secondary" %>
+    </div>
+  </div>
+</section>
+
+

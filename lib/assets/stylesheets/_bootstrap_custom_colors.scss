@@ -1,14 +1,33 @@
-// Custom colors variables
-//$fluo_green: rgba(92,216,34, 1);
+// Declare somes custom colors variables
 
-// New map colors
-$new-colors: (
-//"fluo": $fluo_green
+// $midnight_express: rgba(38, 41, 54, 1);
+$midnight_express: rgba(45, 33, 85, 1);
+$deep_blue: rgba(48, 56, 110, 1);
+$blue_violet: rgba(76, 88, 187, 1);
+// $orange_mecanic: rgba(242, 145, 56, 1);
+$orange_mecanic: rgba(0, 170, 115, 1);
+$neon_carrot: rgba(242, 157, 56, 1);
+$light_pulpit: rgba(254, 246, 237, 1);
+$green: rgba(0, 169, 151, 1);
+
+// Create custom colors map
+$new-theme-colors: (
+  "primary": $midnight_express,
+  "secondary": $orange_mecanic,
+  "deep_blue": $deep_blue,
+  "neon_carrot": $neon_carrot,
+  "blue_violet": $blue_violet,
+  "light_pulpit": $light_pulpit,
+  "green": $green
 );
 
-// Merge new map colors with default colors
-$theme-colors: map-merge($theme-colors, $new-colors);
 
+// Used to apply updates
+
+$theme-colors: map-merge($theme-colors, $new-theme-colors);
+
+// Since 5.1.0 you must add the following to add the new colors to the mixin and benefits 
+// of the new colors utilities (--bs-text-opacity)
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 $utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
 $utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");

@@ -1,0 +1,38 @@
+<section class="row justify-content-center py-3 mb-5 bg-primary">
+  <div class="col-md-6 text-center">
+    <h2 class="text-light">Bienvenue dans votre médiathèque</h2>
+  </div>
+</section>
+
+<section class="row">
+  <% if flash.any? %>
+    <%= render 'shared/flash' %>
+  <% end %>
+  
+  <% @user_trainings.each do |user_training| %>
+    <div class="col-md-4 col-lg-3 mb-3"> 
+      <div class="card bg-primary text-light">
+        <%= image_tag('code_bg.jpg', alt: "Background code theme card", class: 'card-img-top') %>
+        
+        <div class="card-body mt-2">
+          <h5 class="card-title"><%= user_training.training.title %></h5>
+          <p class="card-text my-4">
+            <%= user_training.training.description.truncate(60,separator:" ") %>
+          </p>
+        </div>
+        
+        <div class="card-footer">
+          <%= link_to user_trainings_path+"?training=#{user_training.training.id}", remote: true, class:"d-flex align-items-center" do %>
+            <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
+            <span class="ms-3 text-secondary">Poursuivre</span>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<section id="uts">
+  <%# Ajax %>
+</section>

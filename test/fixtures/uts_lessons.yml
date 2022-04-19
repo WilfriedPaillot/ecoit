@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ut_section: one
+  completed: false
+
+two:
+  ut_section: two
+  completed: false
