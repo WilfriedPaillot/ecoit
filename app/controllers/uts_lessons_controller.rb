@@ -5,14 +5,18 @@ class UtsLessonsController < ApplicationController
   def show
     @uts_lesson = UtsLesson.find(params[:id])
     @lesson = Lesson.find_by_id(@uts_lesson.lesson_id)
+    @next = Lesson.find_by_id(@lesson.id.to_i + 1)
   end
   
   def update
     lesson = UtsLesson.find(params[:id])
-    lesson.update(completed: true)
-    section = UtSection.find_by(section_id: lesson.ut_section_id)
-    section.update(completion_rate: section.completion_rate.to_i + 1)
-    # redirect_to uts_lesson_path(lesson.id.to_i + 1)
+
+    if lesson.completed != true
+      lesson.update(completed: true)
+      section = UtSection.find(UtsLesson.find_by(ut_section_id: lesson.ut_section_id).ut_section_id)
+      section.update(completion_rate: section.completion_rate.to_i + 1)
+    end
+
     if UtsLesson.where(id: lesson.id.to_i + 1).exists?
       redirect_to uts_lesson_path(lesson.id.to_i + 1)
     else
