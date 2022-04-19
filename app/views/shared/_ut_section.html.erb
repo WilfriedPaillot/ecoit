@@ -1,7 +1,7 @@
 <%#uts_infos = Section.where(training_id: params[:training])%>
 <%uts_infos = UtSection.where(user_training_id: UserTraining.find_by(user_id: current_user.id, training_id: params[:training])).order(:section_id) %>
   <%if uts_infos.empty? %>
-    <p>Pas de sortie</p>
+    <p>Pas de section</p>
   <%else%>
   <%# Chapter horyzontal card %>
     <%uts_infos.each do |section| %>
@@ -19,8 +19,13 @@
         </div>
         <div class="col-2">
           <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
-            <p class="fs-1"><%= section.completion_rate %> sur <%= UtsLesson.where(ut_section_id: section.id ).length %></p>
-            <%= link_to "Cours", uts_lesson_path(UtsLesson.where(lesson_id: Lesson.find_by(section_id: section.section_id).id).last.id) %>
+            <% lessons = UtsLesson.where(ut_section_id: section.id) %>
+            <p class="fs-1"><%= section.completion_rate %> sur <%= lessons.length %></p>
+            <%if lessons.empty? %>
+              <p>Pas de cours</p>
+            <%else %>
+              <%= link_to "Cours", uts_lesson_path(UtsLesson.where(lesson_id: Lesson.find_by(section_id: section.section_id).id).last.id) %>
+            <%end%>
           </div>
         </div>
       </div>
