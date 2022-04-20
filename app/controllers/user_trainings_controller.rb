@@ -1,4 +1,7 @@
 class UserTrainingsController < ApplicationController
+    before_action :set_user_training, only: [:edit, :update, :destroy]
+    before_action :authenticate_user!
+    
   def index
     @user_trainings = UserTraining.where(user_id: current_user.id)
   end
