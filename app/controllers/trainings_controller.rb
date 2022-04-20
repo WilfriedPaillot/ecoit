@@ -1,5 +1,6 @@
 class TrainingsController < ApplicationController
   before_action :set_training, only: [:show, :edit, :update, :destroy]
+  before_action :instructor?, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     if params[:search].present?
@@ -62,5 +63,13 @@ class TrainingsController < ApplicationController
 
     def training_params
       params.require(:training).permit(:title, :description, :user_id)
+    end
+
+    def instructor?
+      if current_user.instructor?
+        true
+      else
+        redirect_to trainings_path, flash: { danger: "Vous n'êtes pas autorisé à accéder à cette page" }
+      end
     end
 end
