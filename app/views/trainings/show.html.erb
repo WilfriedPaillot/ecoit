@@ -12,10 +12,14 @@
     <p><%= @training.description %></p>
     <div class="d-flex flex-column align-items-center">
       <%= link_to 'Retour catalogue', trainings_path, class:"btn btn-outline-secondary mb-2" %>
-        <%if UserTraining.where(training_id: @training.id, user_id:current_user.id).exists? %>
-          <%= link_to 'Retour à ma formation', user_trainings_path, class:"btn btn-outline-secondary mt-2" %>
+        <%if user_signed_in? %>
+          <%if UserTraining.where(training_id: @training.id, user_id:current_user.id).exists? %>
+            <%= link_to 'Retour à ma formation', user_trainings_path, class:"btn btn-outline-secondary mt-2" %>
+          <%else%>
+            <%= link_to "S'inscrire", user_trainings_path(user_id: current_user.id, training_id: @training.id), method: "POST", class:"btn btn-outline-secondary mt-2" %>
+          <%end%>
         <%else%>
-          <%= link_to "Rejoindre", user_trainings_path(user_id: current_user.id, training_id: @training.id), method: "POST", class:"btn btn-outline-secondary mt-2" %>
+          <%= link_to "Rejoindre", new_user_session_path, class:"btn btn-outline-secondary mt-2" %>
         <%end%>
     </div>
   </div>
