@@ -19,6 +19,11 @@ class TrainingsController < ApplicationController
   def show
     @training = Training.find(params[:id])
     @training_details = Section.where(training_id: @training.id)
+    respond_to  do |format|
+      format.html { render :show }
+      format.json { render json: @training }
+      format.js { render :show }
+    end
   end
 
   def new
