@@ -21,7 +21,7 @@ class UtsLessonsController < ApplicationController
       redirect_to uts_lesson_path(lesson.id.to_i + 1)
     else
       flash[:warning] = "Félicitations, vous avez terminé toutes les leçons de cette formation !"
-      redirect_to user_trainings_path(current_user)
+      redirect_to dashboards_path
     end
   end
 end

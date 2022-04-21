@@ -1,5 +1,6 @@
 class TrainingsController < ApplicationController
   before_action :set_training, only: [:show, :edit, :update, :destroy]
+  before_action :instructor?, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     if params[:search].present?
@@ -18,6 +19,11 @@ class TrainingsController < ApplicationController
   def show
     @training = Training.find(params[:id])
     @training_details = Section.where(training_id: @training.id)
+    respond_to  do |format|
+      format.html { render :show }
+      format.json { render json: @training }
+      format.js { render :show }
+    end
   end
 
   def new
@@ -29,15 +35,9 @@ class TrainingsController < ApplicationController
 
   def create
     @training = Training.new(training_params)
-
-    respond_to do |format|
-      if @training.save
-        format.html { redirect_to @training, notice: 'La formation a bien été créée' }
-        format.json { render :show, status: :created, location: @training }
-      else
-        format.html { render :new }
-        format.json { render json: @training.errors, status: :unprocessable_entity }
-      end
+    @training.user_id = current_user.id
+    if @training.save
+      redirect_to new_section_path(training_id: @training.id)
     end
   end
 
@@ -68,5 +68,13 @@ class TrainingsController < ApplicationController
 
     def training_params
       params.require(:training).permit(:title, :description, :user_id)
+    end
+
+    def instructor?
+      if current_user.instructor?
+        true
+      else
+        redirect_to trainings_path, flash: { danger: "Vous n'êtes pas autorisé à accéder à cette page" }
+      end
     end
 end

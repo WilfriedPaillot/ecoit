@@ -1,0 +1,40 @@
+<section class="row justify-content-center py-3 mb-5 bg-primary">
+  <div class="col-md-6 text-center">
+    <h2 class="text-light">Bienvenue sur votre dashboard</h2>
+    <hr class="text-light">
+    <%= link_to 'Créer une formation', new_training_path, class:"btn btn-outline-secondary" %>
+  </div>
+</section>
+
+<section class="row">
+  <% if flash.any? %>
+    <%= render 'shared/flash' %>
+  <% end %>
+  <h3 class="orange_underline py-3">Retrouvez ci-dessous vos formations publiées</h3>
+  <% @trainings.each do |training| %>
+    <div class="col-md-4 col-lg-3 mb-3"> 
+      <div class="card bg-primary text-light">
+        <%= image_tag('code_bg.jpg', alt: "Background code theme card", class: 'card-img-top') %>
+        
+        <div class="card-body mt-2">
+          <h5 class="card-title"><%= training.title %></h5>
+          <p class="card-text my-4">
+            <%= training.description.truncate(60,separator:" ") %>
+          </p>
+        </div>
+        
+        <div class="card-footer">
+          <%= link_to training_path(training.id), remote: true, class:"d-flex align-items-center" do %>
+            <i class="bi bi-pencil-square text-secondary"></i>
+            <span class="ms-3 text-secondary">Détails</span>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<section id="edit_trainings">
+  <%# Ajax %>
+</section>
