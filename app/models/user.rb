@@ -7,8 +7,14 @@ class User < ApplicationRecord
   enum role: [:student, :instructor, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
+  
+  def what_role?
+    return self.role
+  end
+
   private
     def set_default_role
       self.role ||= :user
     end
+
 end
