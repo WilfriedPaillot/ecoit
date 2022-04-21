@@ -15,12 +15,19 @@
         <li class="nav-item">
           <%= link_to 'Contact', contactez_nous_path, class:"nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to 'Devenez instructeur', devenez_instructeur_path, class:"nav-link" %>
-        </li>
+        <%if user_signed_in? %>
+          <%if current_user.role == 'student' %>
+            <li class="nav-item">
+              <%= link_to 'Devenez instructeur', devenez_instructeur_path, class:"nav-link" %>
+            </li>
+          <%end%>
+        <%end%>
       </ul>
       <%if user_signed_in? %>
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= link_to 'Mon dashboard', dashboards_path, class:"nav-link" %>
+          </li>
           <li class="nav-item">
             <%= link_to 'Mon compte', edit_user_registration_path(current_user.id), class:"nav-link" %>
           </li>
