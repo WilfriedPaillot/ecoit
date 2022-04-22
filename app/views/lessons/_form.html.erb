@@ -23,8 +23,7 @@
 
   <div class="field">
     <%= form.label :section_id %>
-    <%# trainings = Training.where(user_id: current_user.id) %>
-    <%= form.collection_select :section_id, Section.where(training_id: Training.where(user_id: current_user.id).last.id ), :id, :title %>
+    <%= form.collection_select :section_id, Section.where(id: lesson.section_id), :id, :title %>
   </div>
   
   <div class="actions">

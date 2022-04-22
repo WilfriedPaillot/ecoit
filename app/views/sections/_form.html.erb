@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :training_id %>
-    <%= form.collection_select :training_id, Training.where(user_id: current_user.id), :id, :title %>
+    <%= form.collection_select :training_id, Training.where(id: section.training_id), :id, :title %>
   </div>
   
   <div class="actions">
