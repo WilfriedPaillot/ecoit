@@ -13,6 +13,23 @@ class SectionsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @section.update(section_params)
+    if @section.save
+      redirect_to training_path(@section.training_id)
+    end
+  end
+
+  def destroy
+    @section.destroy
+    if @section.destroy
+      redirect_to training_path(@section.training_id)
+    end
+  end
+
   private
   def section_params
     params.require(:section).permit(:title, :description, :training_id)
