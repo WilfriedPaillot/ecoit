@@ -1,1 +1,62 @@
-TEST
+<%#uts_infos = Section.where(training_id: params[:training])%>
+<%training_infos = Section.where(training_id: params[:training]).order(:id) %>
+  <%if training_infos.empty? %>
+    <p>Pas de section</p>
+  <%else%>
+  <%# Chapter horyzontal card %>
+    <%training_infos.each do |section| %>
+      <div class="row my-3">
+        <div class="col-10 bg-primary">
+          <div class="row">
+            <div class="col-md-4 col-lg-3">
+              <%= image_tag(chapter_logo, alt: "Logo du chapitre", class: 'img-fluid') rescue image_tag('SVG_Logo.svg', alt: "Logo du chapitre", class: 'img-fluid') %>
+            </div>
+            <div class="col-auto d-flex flex-column justify-content-center align-items-start">
+              <h4 class="text-light"><%= Section.find(section.id).title %></h4>
+              <p class="text-light"><%= Section.find(section.id).description %></p>
+              <%= link_to 'Editer', edit_section_path(section.id), class:'btn btn-secondary' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
+            <% lessons = Lesson.where(section_id: section.id) %>
+            <%if lessons.empty? %>
+              <p>Pas de cours</p>
+            <%else %>
+              <p class="text-center">
+                <span class="fs-1"><%= lessons.count %></span> <br>
+                cours dans cette section
+              </p>
+            <%end%>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <% lessons = Lesson.where(section_id: section.id) %>
+          <% lessons.each do |lesson| %>
+            <div class="col">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title"><%= lesson.title %></h5>
+                </div>
+                <div class="card-body">
+                  <p class=""><%= Lesson.find(lesson.id).content.truncate(60, separator:" ") %></p>
+                  <%= link_to 'Editer', edit_lesson_path(lesson.id), class:'btn btn-secondary' %>
+                </div>
+              </div>
+            </div>
+          <%end%>
+            <div class="col">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Créer une leçon</h5>
+                </div>
+                <div class="card-body">
+                  <%= link_to 'Créer', new_lesson_path, class:'btn btn-secondary' %>
+                </div>
+              </div>
+            </div>
+      </div>
+    <%end%>
+  <%end%>

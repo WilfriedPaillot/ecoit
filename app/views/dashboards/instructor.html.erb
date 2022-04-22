@@ -24,7 +24,7 @@
         </div>
         
         <div class="card-footer">
-          <%= link_to training_path(training.id), remote: true, class:"d-flex align-items-center" do %>
+          <%= link_to dashboard_instructor_path+"?training=#{training.id}", remote: true, class:"d-flex align-items-center" do %>
             <i class="bi bi-pencil-square text-secondary"></i>
             <span class="ms-3 text-secondary">Détails</span>
           <% end %>
