@@ -2,12 +2,11 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
   def new
-    @lesson = Lesson.new
+    @lesson = Lesson.new(section_id: params[:section_id])
   end
 
   def create
     @lesson = Lesson.new(lesson_params)
-    @lesson.section_id = @lesson[:section_id]
     if @lesson.save
       redirect_to training_path(@lesson.section.training)
     end
@@ -32,7 +31,7 @@ class LessonsController < ApplicationController
 
   private
   def lesson_params
-    params.require(:lesson).permit(:title, :content, :section_id)
+    params.require(:lesson).permit(:title, :content, :section_id, :video, :thumbnail, documents: [])
   end
 
   def set_lesson
