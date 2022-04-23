@@ -29,28 +29,12 @@ p '## Generation des formations ##'
 p ' #############################'
 puts "\n"*2
 
-# 10.times do |x|
-#   instructors = User.where(role: 1)
-#   Training.create(title: Faker::ProgrammingLanguage.name, description: Faker::Marketing.buzzwords, user_id: instructors.sample.id)
-#   p "La leçon #{Training.last.title.upcase} a été créée"
-#   puts "\n"
-#     3.times do |x|
-#       Section.create(title: "TITRE SECTION #{x+1}", description: Faker::Marketing.buzzwords, training_id: Training.last.id)
-#       p "La section #{Section.last.title} de la formation #{Training.last.title.upcase} a été créée"
-#       puts "\n"    
-#         3.times do |y|
-#           Lesson.create(title: "TITRE LECON #{y+1}", content: Faker::Lorem.sentence(word_count: 300), section_id: Section.last.id)
-#           p "La leçon #{Lesson.last.title} de la section #{Section.last.title.upcase} a été créée"
-#           puts "\n"        
-#         end
-#     end
-# end
+instructors = User.where(role: 1).ids
 
-instructor = User.where(role: 1).sample.id
 Training.create(
   title: "Formation de développeur web",
   description: "Cette formation vous permettra de développer votre compétences en développement web.",
-  user_id: instructor
+  user_id: instructors[0]
 )
   Section.create(
     title: "Introduction",
@@ -96,7 +80,7 @@ p '*' * 20
 Training.create(
   title: "Formation Ruby on Rails",
   description: "Cette formation vous permettra de développer votre compétences dans le développement web avec Ruby on Rails.",
-  user_id: instructor
+  user_id: instructors[1]
 )
   Section.create(
     title: "Introduction",
@@ -132,7 +116,47 @@ Training.create(
     p "La formation #{Training.last.title.upcase} a été créée"
     p '*' * 20
 
-    
+Training.create(
+  title: "Accessibilité et SEO",
+  description: "Cette formation vous permettra de développer votre compétences en SEO et Accessibilité.",
+  user_id: instructors[2]
+)
+  Section.create(
+    title: "Accessibilité",
+    description: "Cette section vous permettra d'aborder les notions d'accessibilité appliquée au numérique.",
+    training_id: Training.last.id
+  )    
+    Lesson.create(
+      title: "L’accessibilité numérique à toutes les étapes d’un projet",
+      content: "Vous avez besoin de mieux comprendre l’accessibilité numérique et/ou de savoir comment la prendre en compte à votre niveau  ? Nous sommes très fiers de vous annoncer la création de notre nouvelle formation en ligne «  L’accessibilité numérique à toutes les étapes d’un projet  ».\n
+      Pour l’occasion, nous vous partageons ici la vidéo d’introduction à l’accessibilité numérique du premier module. N’hésitez pas à la relayer/partager pour sensibiliser autour de vous.",
+      url: 'https://www.youtube.com/watch?v=e9dgLfpcE9M',
+      section_id: Section.last.id
+    )
+    Lesson.create(
+      title: "Les bases de l'accessibilité",
+      content: "Lorsqu’un site ou un outil web est bien conçu et bien codé, les personnes handicapées peuvent l’utiliser. Cependant, beaucoup de sites et d’outils développés actuellement contiennent des problèmes d’accessibilité, ce qui les rend dificiles ou impossibles à utiliser par certaines personnes.\n
+      Rendre le web accessible est un avantage pour les internautes, les entreprises et la société. Les standards du web internationaux définissent ce qui est nécessaire pour l’accessibilité.",
+      url: 'https://www.youtube.com/watch?v=z68N3VrA9h4',
+      section_id: Section.last.id
+    )
+  Section.create(
+    title: "Accessibilité orientée SEO",
+    description: "Cette section vous permettra d'aborder les notions d'accessibilité au service du SEO.",
+    training_id: Training.last.id
+  )    
+    Lesson.create(
+      title: "Importance de l'accessibilité au service du SEO",
+      content: "Accessibilité & SEO : et si on relevait le niveau ?",
+      url: 'https://www.youtube.com/watch?v=vvLoYCq9uPw',
+      section_id: Section.last.id
+    )
+  
+    p '*' * 20
+    p "La formation #{Training.last.title.upcase} a été créée"
+    p '*' * 20
+
+
   #   p ' #######################################'
   # p '## Generation des tables user_training ##'
   # p ' #######################################'
