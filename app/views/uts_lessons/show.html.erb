@@ -17,7 +17,9 @@
       <% if @lesson.video.attached? %>
         <%= video_tag(url_for(@lesson.video), controls: '', width: '100%') %>
       <%else %>
-        <p>Pas de vidéo</p>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/<%= @lesson.url[32..42] %>" title="Video '<%= @lesson.title %>'" allowfullscreen></iframe>
+        </div>
       <% end %>
     </div>
     <div id="buttons" class="d-flex my-5">
