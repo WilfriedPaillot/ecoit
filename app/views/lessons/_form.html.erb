@@ -22,8 +22,23 @@
   </div>
 
   <div class="field">
+    <%= form.label :video %>
+    <%= form.file_field :video %>
+  </div>
+
+  <div class="field">
+    <%= form.label :thumbnail %>
+    <%= form.file_field :thumbnail %>
+  </div>
+
+  <div class="field">
+    <%= form.label :documents %>
+    <%= form.file_field :documents, as: :multiple %>
+  </div>
+
+  <div class="field">
     <%= form.label :section_id %>
-    <%= form.collection_select :section_id, Section.where(id: lesson.section_id), :id, :title %>
+    <%= form.collection_select :section_id, Section.where(id: lesson.section_id), :id, :title %>    
   </div>
   
   <div class="actions">
