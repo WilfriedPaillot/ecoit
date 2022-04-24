@@ -11,42 +11,48 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="row my-5">
+    <div class="col-md-6">
+      <h3 class="orange_underline">Détails leçon</h3>
+      <%= form.label :title, class: "form-label mt-3" %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="col-12">
+      <%= form.label :content, class:"form-label mt-3" %>
+      <%= form.text_area :content, class:"form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+  <hr>
+
+  <div class="row justify-content-center">
+    <h3 class="orange_underline">Import vidéo</h3>
+    <p>Sur EcoDevIT vous pouvez uploader votre vidéo OU éviter d'alourdir la dette écologique si cette dernière est déjà sur Youtube ;)</p>
+    <div class="col-md-4">
+      <%= form.label :video, class:"form-label" %>
+      <%= form.file_field :video, class: "form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :url, class:"form-label" %>
+      <%= form.url_field :url, class: "form-control", placeholder: "https://www.youtube.com/watch?v=a1B2c3D4e5F" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :video %>
-    <%= form.file_field :video %>
+<hr>
+
+  <div class="row justify-content-center my-5">
+    <h3 class="orange_underline">Pièces complémentaires</h3>
+    <p>Ajoutez une ou plusieurs pièces</p>
+    <div class="col-md-6">
+      <%= form.label :documents, class:"form-label" %>
+      <%= form.file_field :documents, class: "form-control" %>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <%= form.collection_select :section_id, Section.where(id: lesson.section_id), :id, :title, {}, {class: "d-none"} %>
+      <%= form.submit class:"btn btn-secondary text-light mx-2" %>
+      <%= link_to "Annuler", :back ,class:"btn btn-outline-primary mx-2" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :url %>
-    <%= form.url_field :url %>
-  </div>
-
-  <div class="field">
-    <%= form.label :thumbnail %>
-    <%= form.file_field :thumbnail %>
-  </div>
-
-  <div class="field">
-    <%= form.label :documents %>
-    <%= form.file_field :documents, as: :multiple %>
-  </div>
-
-  <div class="field">
-    <%= form.label :section_id %>
-    <%= form.collection_select :section_id, Section.where(id: lesson.section_id), :id, :title %>    
-  </div>
-  
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
