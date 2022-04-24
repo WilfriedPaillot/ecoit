@@ -1,5 +1,16 @@
 <%= form_with(model: lesson, local: true) do |form| %>
-  <div class="row my-5">
+<div class="row justify-content-center mt-3">
+  <div class="col-md-6">
+    <%if lesson.errors.any? %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h5 class="text-center"><%= pluralize(lesson.errors.count, "erreur") %> à corriger</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+  <div class="row mb-5">
     <div class="col-md-6">
       <% invalid = lesson.errors.include?(:title) %>
       <div class="form-group">
