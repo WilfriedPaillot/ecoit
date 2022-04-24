@@ -1,26 +1,38 @@
 <%= form_with(model: lesson, local: true) do |form| %>
-  <% if lesson.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(lesson.errors.count, "error") %> prohibited this dash from being saved:</h2>
-
-      <ul>
-      <% lesson.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="row my-5">
     <div class="col-md-6">
-      <h3 class="orange_underline">Détails leçon</h3>
-      <%= form.label :title, class: "form-label mt-3" %>
-      <%= form.text_field :title, class: "form-control" %>
+      <% invalid = lesson.errors.include?(:title) %>
+      <div class="form-group">
+        <h3 class="orange_underline">Détails leçon</h3>
+        <%= form.label :title, class: "form-label mt-3" %>
+        <%= form.text_field :title, class: "form-control #{'is-invalid' if invalid}" %>
+
+          <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% lesson.errors.full_messages_for(:title).each do |error_message| %>
+              <li class="list-unstyled"><%= error_message %></li>
+            <% end %>
+          </div>
+          <% end %>
+
+      </div>
     </div>
 
     <div class="col-12">
-      <%= form.label :content, class:"form-label mt-3" %>
-      <%= form.text_area :content, class:"form-control" %>
+      <% invalid = lesson.errors.include?(:content) %>
+      <div class="form-group">
+        <%= form.label :content, class:"form-label mt-3" %>
+        <%= form.text_area :content, class: "form-control #{'is-invalid' if invalid}" %>
+
+          <% if invalid %>
+            <div class="invalid-feedback d-block">
+              <% lesson.errors.full_messages_for(:content).each do |error_message| %>
+                <li class="list-unstyled"><%= error_message %></li>
+              <% end %>
+            </div>
+          <% end %>
+
+      </div>
     </div>
   </div>
 
@@ -29,13 +41,33 @@
   <div class="row justify-content-center">
     <h3 class="orange_underline">Import vidéo</h3>
     <p>Sur EcoDevIT vous pouvez uploader votre vidéo OU éviter d'alourdir la dette écologique si cette dernière est déjà sur Youtube ;)</p>
-    <div class="col-md-4">
-      <%= form.label :video, class:"form-label" %>
-      <%= form.file_field :video, class: "form-control" %>
+    
+    <% invalid = lesson.errors.include?(:url) || lesson.errors.include?(:video) %>
+      <div class="col-md-4">
+    <div class="form-group">
+        <%= form.label :video, class:"form-label" %>
+        <%= form.file_field :video, class: "form-control #{'is-invalid' if invalid}" %>
+        <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% lesson.errors.full_messages_for(:video).each do |error_message| %>
+              <li class="list-unstyled"><%= error_message %></li>
+            <% end %>
+          </div>
+        <% end %>        
+      </div>
     </div>
-    <div class="col-md-4">
-      <%= form.label :url, class:"form-label" %>
-      <%= form.url_field :url, class: "form-control", placeholder: "https://www.youtube.com/watch?v=a1B2c3D4e5F" %>
+      <div class="col-md-4">
+    <div class="form-group">
+        <%= form.label :url, class:"form-label" %>
+        <%= form.url_field :url, class: "form-control #{'is-invalid' if invalid}", placeholder: "https://www.youtube.com/watch?v=a1B2c3D4e5F" %>
+        <% if invalid %>
+          <div class="invalid-feedback d-block">
+            <% lesson.errors.full_messages_for(:url).each do |error_message| %>
+              <li class="list-unstyled"><%= error_message %></li>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 
@@ -45,8 +77,20 @@
     <h3 class="orange_underline">Pièces complémentaires</h3>
     <p>Ajoutez une ou plusieurs pièces</p>
     <div class="col-md-6">
-      <%= form.label :documents, class:"form-label" %>
-      <%= form.file_field :documents, multiple: true, class: "form-control" %>
+      <% invalid = lesson.errors.include?(:documents) %>
+      <div class="form-group">
+        <%= form.label :documents, class:"form-label" %>
+        <%= form.file_field :documents, multiple: true, class: "form-control #{'is-invalid' if invalid}" %>
+
+          <% if invalid %>
+            <div class="invalid-feedback d-block">
+              <% lesson.errors.full_messages_for(:documents).each do |error_message| %>
+                <li class="list-unstyled"><%= error_message %></li>
+              <% end %>
+            </div>
+          <% end %>
+
+      </div>
     </div>
     <div class="col-md-6 d-flex justify-content-center align-items-center">
       <%= form.collection_select :section_id, Section.where(id: lesson.section_id), :id, :title, {}, {class: "d-none"} %>
