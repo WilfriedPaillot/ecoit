@@ -9,6 +9,9 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new(lesson_params)
     if @lesson.save
       redirect_to training_path(@lesson.section.training)
+    else
+      @errors = @lesson.errors.full_messages
+      render :new
     end
   end
 
