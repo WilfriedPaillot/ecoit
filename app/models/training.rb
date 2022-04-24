@@ -2,10 +2,19 @@ class Training < ApplicationRecord
   belongs_to :user
   has_many :sections, dependent: :destroy
 
-  validates :title, presence: true, length: { maximum: 50 }
-  validates :description, presence: true, length: { maximum: 500 }
+  # Validates presence of minimum data for a training
+  validates :title, :description, :user_id, presence: { message: "doit être renseigné" }
+  # Validates title length and uniqueness for user (insctructor)
+  validates :title, uniqueness: { scope: :user_id, message: ' est déjà utilisé pour l\'un de vos cours' }
+  validates :title, length: { in: 10..50, message: ' doit contenir entre 10 et 50 caractères' }, on: :create
+  # Validates description length
+  validates :description, length: { minimum: 50, message: ' doit contenir au moins 50 caractères' }, on: :create
 
-  scope :ordered, -> { order(:created_at => :desc) }
+  # Scope for trainings
+  scope :ordered_by_title, -> { order(:title => :asc) }
+  scope :ordered_by_author, -> { joins(:user).order('users.first_name ASC') }
+  scope :ordered_by_created_at, -> { order(:created_at => :desc) }
+  scope :ordered_by_updated_at, -> { order(:updated_at => :desc) }
 
 private
   def self.search(search)
