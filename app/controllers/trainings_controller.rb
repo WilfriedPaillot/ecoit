@@ -7,12 +7,12 @@ class TrainingsController < ApplicationController
       @trainings = Training.search(params[:search])
       if @trainings.empty?
         flash.now[:danger] = "Aucun résultat pour \"#{params[:search]}\""
-        @trainings = Training.ordered
+        @trainings = Training.ordered_by_created_at
       else
-        @trainings.ordered
+        @trainings.ordered_by_created_at
       end
     else
-      @trainings = Training.ordered
+      @trainings = Training.ordered_by_created_at
     end
   end
 

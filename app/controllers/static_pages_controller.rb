@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def homepage
-    @trainings = Training.ordered.limit(3)
+    @trainings = Training.ordered_by_created_at.limit(3)
   end
 
   def instructor
