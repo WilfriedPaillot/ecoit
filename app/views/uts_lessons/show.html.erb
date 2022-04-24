@@ -22,6 +22,14 @@
         </div>
       <% end %>
     </div>
+    <%if @lesson.documents.attached? %>
+      <div id="documents" class="mt-3">
+        <h3 class="orange_underline">Pièces complémentaires</h3>
+        <% @lesson.documents.each do |document| %>
+          <%= link_to document.filename.to_s, url_for(document), class:"btn btn-outline-primary mx-2 my-2" %>
+        <% end %>
+      </div>
+    <%end%>
     <div id="buttons" class="d-flex my-5">
       <%= link_to "Suivant", uts_lesson_path(@uts_lesson.id), method: 'PUT', class:"btn rounded-pill bg-secondary" %>
       <%= link_to "Quitter", dashboards_path, class:"btn text-secondary" %>

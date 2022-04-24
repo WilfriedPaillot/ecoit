@@ -46,7 +46,7 @@
     <p>Ajoutez une ou plusieurs pièces</p>
     <div class="col-md-6">
       <%= form.label :documents, class:"form-label" %>
-      <%= form.file_field :documents, class: "form-control" %>
+      <%= form.file_field :documents, multiple: true, class: "form-control" %>
     </div>
     <div class="col-md-6 d-flex justify-content-center align-items-center">
       <%= form.collection_select :section_id, Section.where(id: lesson.section_id), :id, :title, {}, {class: "d-none"} %>
