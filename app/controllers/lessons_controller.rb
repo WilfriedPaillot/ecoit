@@ -10,7 +10,8 @@ class LessonsController < ApplicationController
     if @lesson.save
       redirect_to training_path(@lesson.section.training)
     else
-      @errors = @lesson.errors.full_messages
+      # @errors = @lesson.errors.full_messages
+      # flash.now[:danger] = @lesson.errors.full_messages
       render :new
     end
   end
