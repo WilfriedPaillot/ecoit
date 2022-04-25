@@ -37,18 +37,18 @@ Training.create(
   user_id: instructors[0]
 )
   Section.create(
-    title: "Introduction",
+    title: "Introduction aux fondamentaux du Web",
     description: "Cette section vous permettra de développer votre compétences en HTML, CSS.",
     training_id: Training.last.id
   )
     Lesson.create(
-      title: "Le HTML",
+      title: "Le HTML pour de bonnes bases",
       content: "HyperText Markup Language (HTML) est le code utilisé pour structurer une page web et son contenu. Par exemple, le contenu de votre page pourra être structuré en un ensemble de paragraphes, une liste à puces ou avec des images et des tableaux de données. Comme le suggère le titre, cet article vous fournit les bases de compréhension du HTML et de ses fonctions.",
       url: 'https://www.youtube.com/watch?v=8FqZZrbnwkM',
       section_id: Section.last.id
     )
     Lesson.create(
-      title: "Le CSS",
+      title: "Le CSS, l'art de mettre en forme",
       content: "CSS est l'un des langages principaux du Web ouvert et a été standardisé par le W3C. Ce standard évolue sous forme de niveaux (levels), CSS1 est désormais considéré comme obsolète, CSS2.1 correspond à la recommandation et CSS3, qui est découpé en modules plus petits, est en voie de standardisation.",
       url: 'https://www.youtube.com/watch?v=qTN9bNaBCK8',
       section_id: Section.last.id
@@ -88,26 +88,42 @@ Training.create(
     training_id: Training.last.id
   )
     Lesson.create(
-      title: "Introduction",
-      content: "Ruby on Rails est un framework de développement web open-source. Il permet de créer des application Web sécurisées et évolutives. ",
+      title: "Introduction à Ruby on Rails 1/2",
+      content: "Rails is a web application development framework written in the Ruby programming language. It is designed to make programming web applications easier by making assumptions about what every developer needs to get started. It allows you to write less code while accomplishing more than many other languages and frameworks. Experienced Rails developers also report that it makes web application development more fun.
+      Rails is opinionated software. It makes the assumption that there is a \"best\" way to do things, and it's designed to encourage that way - and in some cases to discourage alternatives. If you learn \"The Rails Way\" you'll probably discover a tremendous increase in productivity. If you persist in bringing old habits from other languages to your Rails development, and trying to use patterns you learned elsewhere, you may have a less happy experience.
+      The Rails philosophy includes two major guiding principles:\n
+      Don't Repeat Yourself: DRY is a principle of software development which states that \"Every piece of knowledge must have a single, unambiguous, authoritative representation within a system\". By not writing the same information over and over again, our code is more maintainable, more extensible, and less buggy.
+      Convention Over Configuration: Rails has opinions about the best way to do many things in a web application, and defaults to this set of conventions, rather than require that you specify minutiae through endless configuration files.",
       url: 'https://www.youtube.com/watch?v=zppMfm4fuxM',
       section_id: Section.last.id
     )
     Lesson.create(
-      title: "Introduction",
-      content: "Ruby on Rails est un framework de développement web open-source. Il permet de créer des application Web sécurisées et évolutives. ",
+      title: "Introduction à Ruby on Rails 2/2",
+      content: "En résumé : le fichier routes.rb est ni plus ni moins que le routeur de ton application Rails. Comme on te l'avait expliqué lors de la présentation du modèle MVC, le routeur va dire : \"telle requête HTTP (une requête est définie par un verbe GET/POST/PUT/etc. et une URL) doit renvoyer l'utilisateur vers telle méthode Ruby de tel controller\". \n
+      Ces méthodes Ruby, au sein du controller, feront ensuite leur travail d'interroger (ou non) des models pour finalement construire une view qu'on affichera à l'utilisateur.\n
+      Je te remets le schéma d'une app en MVC pour que tu resitues bien tout ça !",
       url: 'https://www.youtube.com/watch?v=sAi1r8tzzS4',
       section_id: Section.last.id
     )
     Lesson.create(
       title: "Rails basics",
-      content: "Ruby on Rails est un framework de développement web open-source. Il permet de créer des application Web sécurisées et évolutives. ",
+      content: "Sans surprise, la doc a encore prévu le coup, avec une belle ressource sur les routes. Demain nous verrons en détails l'utilisation de la commande resources dans les routes, mais tu peux y jeter un œil héhé.
+      Après, j'imagine que tu dois te dire que ton cerveau va exploser, que tu es loin d'être autonome : si je te demandais de refaire toutes les routes d'un gros site comme The Hacking Project, tu ferais un joli \"lol nope\". \n
+      C'est normal, il te manque une info importante que l'on verra demain : quelles sont les bonnes pratiques pour faire des routes propres \"The Rails Way™ \". \n
+      Patience, on va y venir.",
       url: 'https://www.youtube.com/watch?v=sAi1r8tzzS4',
       section_id: Section.last.id
     )
     Lesson.create(
       title: "Rails first app",
-      content: "Ruby on Rails est un framework de développement web open-source. Il permet de créer des application Web sécurisées et évolutives. ",
+      content: "Quand on fait du développement, nous recherchons en priorité :\n
+      la lisibilité de notre code\n
+      un rangement qui optimise la lisibilité et l'édition dans le futur\n
+      Quand notre code est en production, nous recherchons en priorité :\n
+      la rapidité d’exécution\n
+      l’optimisation en vitesse\n
+      Forcément, ces deux objectifs sont différents et difficilement compatibles : dur d’avoir du code qui s’exécute rapidement si ce dernier est bien rangé dans 40 dossiers et 50 fichiers. 
+      C’est pour cela que les langages de programmation web ont pour la majorité une solution de gestion de CSS, JS et images. Rails a l’Asset Pipeline, une solution efficace qui a fait ses preuves depuis quelques années et qui a inspiré d’autres outils de gestion d’assets par la suite.",
       url: 'https://www.youtube.com/watch?v=fP64Wvz13AM&list=RDCMUCfWZwsP8trUy5uHJg8gcGIQ&index=2',
       section_id: Section.last.id
     )
@@ -147,7 +163,13 @@ Training.create(
   )    
     Lesson.create(
       title: "Importance de l'accessibilité au service du SEO",
-      content: "Accessibilité & SEO : et si on relevait le niveau ?",
+      content: "Un site web accessible est un site dont le contenu est accessible à tous: valides, seniors et personnes en situation de handicap. \n
+      Déficience auditive, visuelle, troubles cognitifs ou mobilité, autant de handicaps qui touchent aujourd’hui près de 18% de la population qui, sans prise en compte spécifique se voient privés d’un accès optimal au web.
+      Un site accessible se devra donc d’être:\n
+      perceptible : accentuer une différentiation des éléments entre eux (textes/images/boutons) et fournir une alternative textuelle aux images ;\n
+      utilisable : le contenu doit être accessible tant grâce à une souris ou assimilé (trackpad par exemple) mais également grâce au clavier via une navigation par tabulation ;\n
+      compréhensible : les textes doivent être lisibles en permanence ;\n
+      robuste : le contenu doit être accessible quel que soit le support sur lequel il est consulté.",
       url: 'https://www.youtube.com/watch?v=vvLoYCq9uPw',
       section_id: Section.last.id
     )
@@ -155,27 +177,3 @@ Training.create(
     p '*' * 20
     p "La formation #{Training.last.title.upcase} a été créée"
     p '*' * 20
-
-
-  #   p ' #######################################'
-  # p '## Generation des tables user_training ##'
-  # p ' #######################################'
-  # puts "\n"*2
-
-# UserTraining.create(user_id: User.where(role: 0).first.id, training_id: Training.first.id)
-# puts " - Link 'user_training' nr. #{UserTraining.last.id} created between user nr. #{User.where(role: 0).first.id} (#{User.find(User.where(role: 0).first.id).email}) and training '#{Training.first.title}'"
-
-# UserTraining.all.each do |ut|
-#   my_training = Training.find(ut.id)
-#   my_chapters = Section.where(training_id:my_training.id)
-#   my_lessons = Lesson.where(section_id:my_chapters.ids)
-
-#   my_chapters.each do |chapter|
-#   UtSection.create(user_training_id: ut.id)
-#   puts "Section nr. #{chapter.title} created between user_training nr. #{ut.id} and section nr. #{chapter.id}"
-#     my_lessons.each do |lesson|
-#       UtsLesson.create(ut_section_id: lesson.section_id)
-#       puts "Lesson nr. #{lesson.title} created between user_training nr. #{ut.id} and section nr. #{lesson.section_id}"
-#     end
-#   end
-# end

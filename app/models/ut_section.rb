@@ -5,7 +5,12 @@ class UtSection < ApplicationRecord
   has_many :lessons, through: :uts_lessons
   
   def completion_rate_percentage
-    completion_rate = uts_lessons.where(completed: true).count * 100 / uts_lessons.count
+    if uts_lessons.where(completed: true).count > 0
+      completion_rate = uts_lessons.where(completed: true).count * 100 / uts_lessons.count
+    else
+      completion_rate = 0
+    end
+    
     completion_rate.to_s + '%'
   end
 
