@@ -1,2 +1,2 @@
 document.getElementById('uts').innerHTML = "";
-document.getElementById('uts').insertAdjacentHTML("afterbegin", "<%= j render 'shared/ut_section'%>");
+document.getElementById('uts').insertAdjacentHTML("afterbegin", "<%= j render 'shared/ut_section', ut_sections: @user_training_sections %>");

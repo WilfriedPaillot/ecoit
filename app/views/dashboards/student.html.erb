@@ -5,7 +5,7 @@
 </section>
 
 <section class="row">
-  <% if flash.any? %>
+  <% if flash[:success] || flash[:warning] %>
     <%= render 'shared/flash' %>
   <% end %>
   
@@ -22,7 +22,8 @@
         </div>
         
         <div class="card-footer">
-          <%= link_to user_trainings_path+"?training=#{user_training.training.id}", remote: true, class:"d-flex align-items-center" do %>
+          <%#= link_to user_trainings_path+"?training=#{user_training.training.id}", remote: true, class:"d-flex align-items-center" do %>
+          <%= link_to dashboard_student_path+"?training=#{user_training.training.id}", remote: true, class:"d-flex align-items-center" do %>
             <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
             <span class="ms-3 text-secondary">Poursuivre</span>
           <% end %>
