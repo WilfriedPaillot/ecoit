@@ -18,6 +18,13 @@ class DashboardsController < ApplicationController
 
   def student
     @user_trainings = UserTraining.where(user_id: current_user.id)
+    @user_training_sections = UtSection.where(user_training_id: UserTraining.find_by(user_id: current_user.id, training_id: params[:training])).order(:section_id)
+    if @user_training_sections.empty?
+      respond_to do |format|
+        format.html { :student }
+        format.js { flash.now[:info] = "Cette formation ne comprend aucune section" }
+      end
+    end
   end
 
   def instructor
