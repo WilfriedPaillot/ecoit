@@ -3,12 +3,12 @@ class UserTrainingsController < ApplicationController
     before_action :authenticate_user!
 
   def index
-    @user_trainings = UserTraining.where(user_id: current_user.id)
+    # @user_trainings = UserTraining.where(user_id: current_user.id)
   end
 
   def show
-    @user_training = UserTraining.find(params[:id])
-    @user_training_sections = UtSection.where(user_training_id: @user_training.id)
+    # @user_training = UserTraining.find(params[:id])
+    # @user_training_sections = UtSection.where(user_training_id: @user_training.id)
   end
 
   def create
@@ -23,7 +23,7 @@ class UserTrainingsController < ApplicationController
             UtsLesson.create(ut_section_id: UtSection.last.id, lesson_id: lesson.id)
           end
         end
-      redirect_to user_trainings_path, flash: { success: "La formation a bien été ajoutée à votre médiathèque" }
+      redirect_to dashboards_path, flash: { success: "La formation a bien été ajoutée à votre médiathèque" }
     end
   end
 
