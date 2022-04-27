@@ -2,18 +2,18 @@
     <%ut_sections.each do |ut_section| %>
       <div class="row my-3">
         <div class="col-md-10 bg-primary">
-          <div class="row">
+          <div class="row ">
             <div class="col-md-4">
               <%= image_tag(url_for(ut_section.section.thumbnail), class: 'img-fluid') rescue image_tag('SVG_Logo.svg', alt: "Logo générique de section", class: 'img-fluid') %>
             </div>
-            <div class="col-auto d-flex flex-column justify-content-center align-items-start">
-              <h4 class="text-light px-3"><%= ut_section.section.title %></h4>
-              <p class="text-light px-3"><%= ut_section.section.description.chop %> grâce à ses <span class="fs-5 text-secondary"><%= ut_section.get_lessons_count %></span> leçons !</p>
+            <div class="col d-flex flex-column justify-content-center align-items-start">
+              <h4 class="text-light px-3 px-md-0"><%= ut_section.section.title %></h4>
+              <p class="text-light px-3 px-md-0"><%= ut_section.section.description.chop %> grâce à ses <span class="fs-5 text-secondary"><%= ut_section.get_lessons_count %></span> leçons !</p>
             </div>
           </div>
         </div>
         <div class="col-md-2 mt-2 mt-md-0">
-          <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100 p-2">
+          <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100 p-2 p-md-0">
             <p class="fs-1"><%= ut_section.completion_rate_percentage %></p>
             <%unless ut_section.is_empty? %>
               <%= link_to "Cours", uts_lesson_path(ut_section.get_first_lesson) %>
